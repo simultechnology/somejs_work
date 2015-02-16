@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Chart Tools</title>
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+        google.load('visualization', '1.0', {'packages':['corechart']});
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // 円グラフ
+            // データを用意する
+            // 列    列 列
+            // label n n
+            // label n n
+            // label n n
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '年');
+            data.addColumn('number', '売上');
+            data.addColumn('number', '利益');
+            data.addRows([
+                ['2010', 1300, 400],
+                ['2011', 3000, 2300],
+                ['2012', 500, 300],
+                ['2013', 1200, 900],
+                ['2014', 2000, 1000]
+            ]);
+
+            // グラフのオプションを指定する
+            var options = {
+                title: '業績推移',
+                width: 500,
+                height: 500
+//                isStacked: true
+//                is3D: true
+
+            };
+
+            // 描画する
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+            chart.draw(data, options);
+        }
+
+    </script>
+</head>
+<body>
+<div id="chart"></div>
+</body>
+</html>
+
