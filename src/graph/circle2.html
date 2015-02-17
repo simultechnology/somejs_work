@@ -5,8 +5,17 @@
     <title>Google Chart Tools</title>
     <script src="https://www.google.com/jsapi"></script>
     <script>
+
+        function bind(context, func) {
+            return function() {
+                return func.apply(context, arguments);
+            }
+        }
         google.load('visualization', '1.0', {'packages':['corechart']});
-        google.setOnLoadCallback(drawChart);
+        google.setOnLoadCallback(bind({id: 'chart'}, drawChart));
+        google.setOnLoadCallback(bind({id: 'chart2'}, drawChart));
+
+        //google.setOnLoadCallback
 
         function drawChart() {
             // 円グラフ
@@ -30,13 +39,13 @@
             var options = {
                 title: '1日の内訳',
                 width: 500,
-                height: 500,
+                height: 350,
                 pieSliceText: 'label'
 //                is3D: true
             };
 
             // 描画する
-            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            var chart = new google.visualization.PieChart(document.getElementById(this.id));
             chart.draw(data, options);
         }
 
@@ -44,6 +53,7 @@
 </head>
 <body>
 <div id="chart"></div>
+<div id="chart2"></div>
 </body>
 </html>
 

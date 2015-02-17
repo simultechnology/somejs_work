@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Chart Tools</title>
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+        google.load('visualization', '1.0', {'packages':['corechart']});
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var query = new google.visualization.Query(
+                    'https://docs.google.com/spreadsheets/d/1n5aeaGOe8BBD4RH0eGJ43wFgO2O21D3goGFAOsgDYPE/edit?usp=sharing'
+            );
+            query.send(handleQueryResponse);
+        }
+
+        function handleQueryResponse(response) {
+            if (response.isError()) {
+                alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                return;
+            }
+
+            var data = response.getDataTable();
+            console.log(data);
+            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            chart.draw(data, {legend: {position: 'none'}});
+        }
+
+    </script>
+</head>
+<body>
+<div id="chart"></div>
+</body>
+</html>
+

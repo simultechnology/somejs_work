@@ -10,7 +10,6 @@ module.exports = function (grunt) {
                 options: {
                     open: true,
                     port: '<%= port %>',
-                    livereload: 35729,
                     hostname: 'localhost',
                     base: [ '<%= dirs.src %>' ]
                 }
@@ -24,7 +23,7 @@ module.exports = function (grunt) {
             ],
             reload: {
                 options: {
-                    livereload: 35729
+                    livereload: 45729
                 },
                 files: [
                     '<%= dirs.src %>/**/*.js',
